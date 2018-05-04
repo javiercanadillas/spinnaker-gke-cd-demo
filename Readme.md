@@ -9,10 +9,20 @@ You can follow all the steps in Cloud Shell. To clone this repo and open this ve
 [![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/open?git_repo=https%3A%2F%2Fgithub.com%2Fsh3lld00m%2Fspinnaker-gke-cd-demo.git&page=shell&tutorial=Readme.md)
 
 ## Setup and install Spinnaker
-Clone this repo and review the environment variable `REGION` to match your specific region (you can see a list of the available
-running ```gcloud compute regions list```). Once the change is done, run the script:
+Clone this repo:
 
-	./install_spinnaker.sh
+```bash
+git clone https://github.com/sh3lld00m/spinnaker-gke-cd-demo.git
+```
+
+Review the environment variable ```REGION``` in the script ìnstall_spinnaker.sh` to match your specific region. By default, the script will deploy the Kubernetes cluster where Spinnaker is going to run in Belgium (europe-west1). You can see a list of the available
+running ```gcloud compute regions list```.
+
+Once the change is done, run the script:
+
+```bash
+./install_spinnaker.sh
+```
 
 This script should take care of
 
@@ -28,7 +38,9 @@ in your browser.
 
 If your Cloud Shell session gets closed, you can always re-establish the proxy connection running the following script:
 
-	./forward_spk_ui
+```bash
+./forward_spk_ui
+```
 
 ## Building the Docker image
 
@@ -36,16 +48,22 @@ If your Cloud Shell session gets closed, you can always re-establish the proxy c
 
 Change directories to source code:
 
-	cd sample-app
+```bash
+cd sample-app
+```
 
-If you haven't configured Git before, uncomment the following lines in the `git_setup.sh` and replace both `EMAIL_ADDRESS` and `USERNAME` with your Git email address and username:
+If you haven't configured Git before, uncomment the following lines in the ```git_setup.sh``` and replace both `EMAIL_ADDRESS` and ```USERNAME``` with your Git email address and username:
 
-	git config --global user.email "[EMAIL_ADDRESS]"
-	git config --global user.name "[USERNAME]"
+```bash
+git config --global user.email "[EMAIL_ADDRESS]"
+git config --global user.name "[USERNAME]"
+```
 
 Once done, run thee `git_setup.sh` script that will make sure the `sample-app` code gets uploaded to a Cloud Source Repository in your project:
 
-	./git_setup.sh
+```bash
+./git_setup.sh
+```
 
 Check that you can see your source code in the Google Cloud Console:
 
@@ -60,9 +78,9 @@ Set the following trigger settings:
 
 - **Name**: sample-app-tags
 - **Trigger type**: Tag
-- **Tag (regex)**: `v.*`
-- **Build configuration**: `cloudbuild.yaml`
-- **cloudbuild.yaml location**: `/cloudbuild.yaml`
+- **Tag (regex)**: ```v.*```
+- **Build configuration**: ```cloudbuild.yaml```
+- **cloudbuild.yaml location**: ```/cloudbuild.yaml```
 
 Click **Create trigger**. 
 
@@ -70,18 +88,22 @@ Click **Create trigger**.
 
 Go to your source code in Cloud Shell, create a Git tag:
 
-	git tag v1.0.0
+```bash
+git tag v1.0.0
+```
 
 Push the tag:
 
-	git push --tag
+```bash
+git push --tag
+```
 
 In **Container Registry** in the Cloud Console, click [**Build History**](https://console.cloud.google.com/gcr/builds?_ga=2.124750090.-1043472229.1512401199) to check that the build has been triggered.
 
 ## Configuring your deployment pipelines
 
-Follow the official solution tutorial from the section of the same name, and when it comes to **Create the deployment pipeline** subsection, use the script `pipeline_setup.sh` in the `sample-app` section to upload an example pipeline to your Spinnaker instance.
+Follow the official solution tutorial from the section of the same name, and when it comes to **Create the deployment pipeline** subsection, use the script ```pipeline_setup.sh``` in the ```sample-app``` section to upload an example pipeline to your Spinnaker instance.
 
 ## Shutting down the demo
-Run the `cleanup.sh` script and if you want, proceed to remove your project.
+Run the ```cleanup.sh``` script and if you want, proceed to remove your project.
 
