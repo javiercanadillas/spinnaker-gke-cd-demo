@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export DECK_POD=$(kubectl get pods --namespace default -l "component=deck" \
+    -o jsonpath="{.items[0].metadata.name}")
+kubectl port-forward --namespace default $DECK_POD 8080:9000 >> /dev/null &
