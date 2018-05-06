@@ -3,5 +3,5 @@ vendor/**
 **/debug
 git_setup.sh
 pipeline_setup.sh
-k8s/
-spinnaker/
+/k8s/
+/spinnaker/

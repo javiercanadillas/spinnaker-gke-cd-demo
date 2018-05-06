@@ -112,6 +112,7 @@ We're going to deploy a scaled-down environment for integration testing. After t
 2. In the **New Application** dialog, enter the following fields:
 - **Name**: sample
 - **Owner Email**: [your email address]
+- **Accounts**: select csr (for Cloud Source Repositories)
 3. Click **Create**.
 
 ### Create service load balancers
