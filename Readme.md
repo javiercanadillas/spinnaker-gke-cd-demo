@@ -102,7 +102,35 @@ In **Container Registry** in the Cloud Console, click [**Build History**](https:
 
 ## Configuring your deployment pipelines
 
-Follow the official solution tutorial from the section of the same name, and when it comes to **Create the deployment pipeline** subsection, use the script ```pipeline_setup.sh``` in the ```sample-app``` section to upload an example pipeline to your Spinnaker instance.
+Images are building now automatically. Now it is time to deploy them to the Kubernetes cluster.
+
+We're going to deploy a scaled-down environment for integration testing. After the integration pass, you must manually approve the changes to deploy the code to production services.
+
+### Create the application
+
+1. In the Spinnaker UI, click **Actions**, then click **Create Application**.
+2. In the **New Application** dialog, enter the following fields:
+- **Name**: sample
+- **Owner Email**: [your email address]
+3. Click **Create**.
+
+### Create service load balancers
+
+In Cloud Shell, run the following command from the ```sample-app``` root directory:
+
+```bash
+kubectl apply -f k8s/services
+```
+### Create the deployment pipeline
+
+1. From Cloud Shell, run the script ```pipeline_setup.sh``` in the ```sample-app``` section to upload an example pipeline to your Spinnaker instance.
+
+2. In the Spinnaker UI, click **Pipelines** on the top navigation bar.
+
+3. Click **Configure** in the ```Deploy``` pipeline. The continuous delivery pipeline configuration should appear in the UI.
+
+### Test everything
+From here, you can continue from the section **Run your pipeline manually** in the [solution documentation](https://cloud.google.com/solutions/continuous-delivery-spinnaker-kubernetes-engine) from the Google Cloud Platform web page.
 
 ## Shutting down the demo
 Run the ```cleanup.sh``` script and if you want, proceed to remove your project.
