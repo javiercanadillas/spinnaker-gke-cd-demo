@@ -23,7 +23,7 @@ addapi(){
 }
 
 # Enable APIs
-addapi container.googleapis.com cloudresourcemanager.googleapis.com cloudbuild.googleapis.com storage-api.googleapis.com
+addapi container.googleapis.com cloudresourcemanager.googleapis.com cloudbuild.googleapis.com storage-api.googleapis.com sourcerepo.googleapis.com
 
 gcloud config set compute/zone $ZONE
 gcloud container clusters create spinnaker-tutorial --machine-type=n1-standard-2
